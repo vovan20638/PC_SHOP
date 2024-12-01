@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+}
+
+.card {
+    margin: 25px;
+
+}
+
+.cards {
+    display: flex;
+}
