@@ -1,5 +1,6 @@
 body {
     margin: 0px;
+    zoom: 35%;
 }
 
 .card {
@@ -10,3 +11,4 @@ body {
 .cards {
     display: flex;
 }
+
