@@ -22,7 +22,7 @@
       <div class="card-body">
         <h5 class="card-title">Intel Core i9-14900K OEM</h5>
         <p class="card-text">Да это intel</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button href="#" onclick="tg1" value="start" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -92,6 +92,40 @@
       // Проверяем, доступен ли Telegram WebApp
       if (window.Telegram && window.Telegram.WebApp) {
         const tg = window.Telegram.WebApp;
+        let url = 'https://d5dr7h7dlrjdbk7uf7vp.apigw.yandexcloud.net';
+        var data = JSON.stringify("ДАННЫЕ_ДЛЯ ОТПРАВКИ");
+
+        // Функция, которая будет запускаться при нажатии на кнопку "Купить"
+        document.getElementById('startButton').addEventListener('click', function () {
+          // Показать основную кнопку Telegram
+          tg.MainButton.show();
+          tg.MainButton.setText("Оплатить");
+
+          // Настроим обработчик нажатия на основную кнопку
+          tg.MainButton.onClick(() => {
+            console.log("start");
+
+            // Выполнение POST-запроса
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-Custom-Info", "getOpenInvoiceUrl");
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                tg.openInvoice(xhr.responseText);
+              }
+            };
+            xhr.send(data);
+          });
+        });
+      } else {
+        console.error('Telegram WebApp не доступен.');
+      }
+    </script>
+     <script>
+      // Проверяем, доступен ли Telegram WebApp
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tg1 = window.Telegram.WebApp;
         let url = 'https://d5dr7h7dlrjdbk7uf7vp.apigw.yandexcloud.net';
         var data = JSON.stringify("ДАННЫЕ_ДЛЯ ОТПРАВКИ");
 
