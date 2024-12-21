@@ -14,7 +14,7 @@
       <div class="card-body">
         <h5 class="card-title">RTX 4090</h5>
         <p class="card-text">Да это 4090</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -22,7 +22,7 @@
       <div class="card-body">
         <h5 class="card-title">Intel Core i9-14900K OEM</h5>
         <p class="card-text">Да это intel</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -30,7 +30,7 @@
       <div class="card-body">
         <h5 class="card-title">Материнская плата</h5>
         <p class="card-text">Да это Материнская плата</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
       <div class="card-body">
         <h5 class="card-title">DEEPCOOL CK560 [R-CK560-BKAAE4-G-1] черный</h5>
         <p class="card-text">Да это Корпус</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -48,7 +48,7 @@
       <div class="card-body">
         <h5 class="card-title">MONTECH CENTURY 850 [CENTURY 850]</h5>
         <p class="card-text">Да это бп</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -56,7 +56,7 @@
       <div class="card-body">
         <h5 class="card-title">23.8" Монитор Dell E2424HS</h5>
         <p class="card-text">Да это монитор</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
       <div class="card-body">
         <h5 class="card-title">Cooler Master MasterAir MA612 Stealth ARGB [LGA1700] [MAP-T6PS-218PA-R1]</h5>
         <p class="card-text">Да это Кулер</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -74,7 +74,7 @@
       <div class="card-body">
         <h5 class="card-title">Apacer NOX [AH4U32G32C28YMBAA-2] 32 ГБ</h5>
         <p class="card-text">Да это оперативная память</p>
-        <button href="#" onclick="tg" value="start" class="btn btn-primary">Купить</button>
+        <button id="startButton" class="btn btn-primary">Купить</button>
       </div>
     </div>
     <div class="card" style="width: 20rem;">
@@ -89,38 +89,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
    <script>
-    // Проверяем, доступен ли Telegram WebApp
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      let url = 'https://d5dr7h7dlrjdbk7uf7vp.apigw.yandexcloud.net';
-      var data = JSON.stringify("ДАННЫЕ_ДЛЯ ОТПРАВКИ");
+      // Проверяем, доступен ли Telegram WebApp
+      if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        let url = 'https://d5dr7h7dlrjdbk7uf7vp.apigw.yandexcloud.net';
+        var data = JSON.stringify("ДАННЫЕ_ДЛЯ ОТПРАВКИ");
 
-      // Функция, которая будет запускаться при нажатии на кнопку "Купить"
-      document.getElementById('startButton').addEventListener('click', function () {
-        // Показать основную кнопку Telegram
-        tg.MainButton.show();
-        tg.MainButton.setText("Оплатить");
+        // Функция, которая будет запускаться при нажатии на кнопку "Купить"
+        document.getElementById('startButton').addEventListener('click', function () {
+          // Показать основную кнопку Telegram
+          tg.MainButton.show();
+          tg.MainButton.setText("Оплатить");
 
-        // Настроим обработчик нажатия на основную кнопку
-        tg.MainButton.onClick(() => {
-          console.log("start");
+          // Настроим обработчик нажатия на основную кнопку
+          tg.MainButton.onClick(() => {
+            console.log("start");
 
-          // Выполнение POST-запроса
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          xhr.setRequestHeader("Content-Type", "application/json");
-          xhr.setRequestHeader("X-Custom-Info", "getOpenInvoiceUrl");
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              tg.openInvoice(xhr.responseText);
-            }
-          };
-          xhr.send(data);
+            // Выполнение POST-запроса
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-Custom-Info", "getOpenInvoiceUrl");
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                tg.openInvoice(xhr.responseText);
+              }
+            };
+            xhr.send(data);
+          });
         });
-      });
-    } else {
-      console.error('Telegram WebApp не доступен.');
-    }
+      } else {
+        console.error('Telegram WebApp не доступен.');
+      }
     </script>
   </body>
 </html>
