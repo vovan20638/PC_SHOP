@@ -120,9 +120,7 @@
         });
       } else {
         console.error('Telegram WebApp не доступен.');
-      }
-    </script>
-     <script>
+
       // Проверяем, доступен ли Telegram WebApp
       if (window.Telegram && window.Telegram.WebApp) {
         const tg1 = window.Telegram.WebApp;
@@ -132,11 +130,11 @@
         // Функция, которая будет запускаться при нажатии на кнопку "Купить"
         document.getElementById('startButton').addEventListener('click', function () {
           // Показать основную кнопку Telegram
-          tg.MainButton.show();
-          tg.MainButton.setText("Оплатить");
+          tg1.MainButton.show();
+          tg1.MainButton.setText("Оплатить");
 
           // Настроим обработчик нажатия на основную кнопку
-          tg.MainButton.onClick(() => {
+          tg1.MainButton.onClick(() => {
             console.log("start");
 
             // Выполнение POST-запроса
@@ -146,7 +144,7 @@
             xhr.setRequestHeader("X-Custom-Info", "getOpenInvoiceUrl");
             xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
-                tg.openInvoice(xhr.responseText);
+                tg1.openInvoice(xhr.responseText);
               }
             };
             xhr.send(data);
